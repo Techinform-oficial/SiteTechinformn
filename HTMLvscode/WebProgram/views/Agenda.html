@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda</title>
+</head>
+
+<body>
+
+<style>
+/* ======================================================
+   AGENDA — BASE
+====================================================== */
+
+.agenda-container {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* ======================================================
+   HEADER (ANO)
+====================================================== */
+
+.agenda-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.current-year {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0b2958;
+}
+
+.year-nav {
+    background: #0b2958;
+    color: #ffffff;
+    border: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* ======================================================
+   CORPO PRINCIPAL
+====================================================== */
+
+.agenda-body {
+    display: grid;
+    grid-template-columns: 240px 1fr 260px;
+    gap: 18px;
+}
+
+/* ======================================================
+   LATERAIS
+====================================================== */
+
+.agenda-sidebar-left,
+.agenda-sidebar-right {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.agenda-sidebar-left h3,
+.agenda-sidebar-right h3 {
+    font-size: 15px;
+    margin-bottom: 12px;
+    color: #0b2958;
+}
+
+/* Botões laterais */
+.agenda-btn {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    background: #0b2958;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.agenda-btn:hover {
+    background: #123c7a;
+}
+
+.agenda-filters label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+
+/* ======================================================
+   CALENDÁRIO CENTRAL
+====================================================== */
+
+.agenda-calendar {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mês */
+.month-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.current-month {
+    font-size: 22px;
+    font-weight: 600;
+    color: #0b2958;
+}
+
+/* Grade estilo planilha */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Cabeçalho dos dias */
+.calendar-header {
+    background: #f1f5f9;
+    padding: 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    border-bottom: 1px solid #d1d5db;
+}
+
+/* Células */
+.calendar-cell {
+    min-height: 110px;
+    padding: 6px;
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    background: #ffffff;
+    position: relative;
+}
+
+.calendar-cell:nth-child(7n) {
+    border-right: none;
+}
+
+.calendar-cell:hover {
+    background: #eef2ff;
+}
+
+/* Dias fora do mês */
+.calendar-cell.muted {
+    background: #f8fafc;
+}
+
+/* Número do dia */
+.day-number {
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+}
+
+/* Eventos no dia */
+.day-events {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.event {
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #ffffff;
+    width: fit-content;
+}
+
+.event.prazo {
+    background: #dc2626;
+}
+
+.event.evento {
+    background: #2563eb;
+}
+
+.event.importante {
+    background: #f59e0b;
+}
+
+/* ======================================================
+   LATERAL DIREITA — DETALHES
+====================================================== */
+
+.day-details p {
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.event-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.event-list li {
+    padding: 6px 0;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 13px;
+}
+
+.event-list li:last-child {
+    border-bottom: none;
+}
+
+/* ======================================================
+   BARRA DE MESES
+====================================================== */
+
+.agenda-months-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.month-btn {
+    background: #e5e7eb;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.month-btn:hover {
+    background: #dbeafe;
+}
+
+.month-btn.active {
+    background: #0b2958;
+    color: #ffffff;
+}
+</style>
+
+
+<!-- Área principal da aba Agenda -->
+<div class="main-content">
+
+    <div class="page">
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <span>Início</span>
+            <span class="sep">></span>
+            <span>Agenda</span>
+        </div>
+
+        <!-- Título -->
+        <h1>Agenda</h1>
+
+        <!-- CONTAINER PRINCIPAL -->
+        <div class="agenda-container">
+
+            <!-- TOPO: ANO + NAVEGAÇÃO -->
+            <header class="agenda-header">
+                <button class="year-nav prev-year">◀</button>
+                <h2 class="current-year">2025</h2>
+                <button class="year-nav next-year">▶</button>
+            </header>
+
+            <!-- CORPO DA AGENDA -->
+            <div class="agenda-body">
+
+                <!-- LATERAL ESQUERDA: OPÇÕES -->
+                <aside class="agenda-sidebar-left">
+                    <h3>Opções</h3>
+
+                    <button class="agenda-btn">➕ Novo Evento</button>
+                    <button class="agenda-btn">📌 Novo Prazo</button>
+
+                    <div class="agenda-filters">
+                        <label>
+                            <input type="checkbox"> Eventos
+                        </label>
+                        <label>
+                            <input type="checkbox"> Prazos
+                        </label>
+                        <label>
+                            <input type="checkbox"> Datas Importantes
+                        </label>
+                    </div>
+                </aside>
+
+                <!-- CALENDÁRIO CENTRAL -->
+                <section class="agenda-calendar">
+
+                    <!-- MÊS ATUAL -->
+                    <div class="month-header">
+                        <h3 class="current-month">Janeiro</h3>
+                    </div>
+
+                    <!-- GRADE DO CALENDÁRIO (PLANILHA) -->
+                    <div class="calendar-grid">
+
+                        <!-- Cabeçalho dos dias -->
+                        <div class="calendar-header">Dom</div>
+                        <div class="calendar-header">Seg</div>
+                        <div class="calendar-header">Ter</div>
+                        <div class="calendar-header">Qua</div>
+                        <div class="calendar-header">Qui</div>
+                        <div class="calendar-header">Sex</div>
+                        <div class="calendar-header">Sáb</div>
+
+                        <!-- Dias (exemplo estrutural) -->
+                        <div class="calendar-cell muted"></div>
+                        <div class="calendar-cell muted"></div>
+
+                        <div class="calendar-cell">
+                            <span class="day-number">1</span>
+                            <div class="day-events">
+                                <div class="event prazo">Prazo</div>
+                            </div>
+                        </div>
+
+                        <div class="calendar-cell">
+                            <span class="day-number">2</span>
+                        </div>
+
+                        <div class="calendar-cell">
+                            <span class="day-number">3</span>
+                        </div>
+
+                        <!-- Continue até 31 -->
+                        <div class="calendar-cell">
+                            <span class="day-number">31</span>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- LATERAL DIREITA: DETALHES -->
+                <aside class="agenda-sidebar-right">
+                    <h3>Detalhes do Dia</h3>
+
+                    <div class="day-details">
+                        <p><strong>Data:</strong> 01/01/2025</p>
+
+                        <ul class="event-list">
+                            <li>
+                                <strong>📌 Prazo</strong>
+                                <span>Entrega de relatório</span>
+                            </li>
+                            <li>
+                                <strong>📅 Evento</strong>
+                                <span>Reunião administrativa</span>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+
+            </div>
+
+            <!-- BARRA INFERIOR: MESES -->
+            <footer class="agenda-months-bar">
+                <button class="month-btn active">Jan</button>
+                <button class="month-btn">Fev</button>
+                <button class="month-btn">Mar</button>
+                <button class="month-btn">Abr</button>
+                <button class="month-btn">Mai</button>
+                <button class="month-btn">Jun</button>
+                <button class="month-btn">Jul</button>
+                <button class="month-btn">Ago</button>
+                <button class="month-btn">Set</button>
+                <button class="month-btn">Out</button>
+                <button class="month-btn">Nov</button>
+                <button class="month-btn">Dez</button>
+            </footer>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

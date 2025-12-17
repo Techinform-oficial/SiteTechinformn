@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incluir-Documento</title>
+</head>
+
+<Style>
+
+
+/* ===========================
+   INCLUIR DOCUMENTO
+=========================== */
+
+.include-container {
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.card h2 {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+/* Upload */
+.upload-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.upload-area {
+    border: 2px dashed #bbb;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.upload-area:hover {
+    border-color: #2563eb;
+}
+
+.upload-icon {
+    font-size: 32px;
+    display: block;
+}
+
+.file-preview {
+    font-size: 13px;
+    color: #555;
+}
+
+/* Form */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* Ações */
+.form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.btn-primary {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background: #e5e7eb;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/*incluir documento, layout personalisado/
+/* ========================================================================== */
+/* INCLUIR DOCUMENTO — LAYOUT PROFISSIONAL                                   */
+/* ========================================================================== */
+
+/* Card único */
+.include-card {
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    padding: 28px;
+}
+
+/* Cabeçalho */
+.include-header h2 {
+    font-size: 20px;
+    margin-bottom: 4px;
+    color: #111827;
+}
+
+.include-header p {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 24px;
+}
+
+/* Seções */
+.include-section {
+    margin-bottom: 22px;
+}
+
+.section-title {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 10px;
+}
+
+/* Grid */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* Upload */
+.upload-area {
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 36px;
+    text-align: center;
+    background: #f9fafb;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.upload-area:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.upload-icon {
+    font-size: 36px;
+    margin-bottom: 6px;
+}
+
+.file-preview {
+    margin-top: 10px;
+    font-size: 13px;
+    padding: 8px 12px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    color: #334155;
+}
+
+/* Form */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-row label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+/* Ações */
+.include-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background: #f1f5f9;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* ========================================================================== */
+/* SIDEBAR TOOLTIP — ACESSIBILIDADE & ESTÉTICA                                */
+/* ========================================================================== */
+
+/* ===================== SIDEBAR TOOLTIP ===================== */
+
+.sidebar {
+    overflow-x: visible;
+}
+
+.sidebar-item {
+    position: relative;
+}
+
+/* Tooltip */
+.sidebar-item::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translate(14px, -50%);
+    background: #0b2958;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    z-index: 99999;
+}
+
+/* Setinha */
+.sidebar-item::before {
+    content: "";
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translate(6px, -50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent #0b2958 transparent transparent;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 99999;
+}
+
+/* Mostrar SOMENTE quando colapsada */
+.sidebar.collapsed .sidebar-item:hover::after,
+.sidebar.collapsed .sidebar-item:hover::before {
+    opacity: 1;
+}
+
+/* Destaque visual */
+.sidebar.collapsed .sidebar-item:hover {
+    background: rgba(11, 41, 88, 0.2);
+}
+
+/* Item ativo */
+.sidebar-item.active {
+    background: rgba(11, 41, 88, 0.3);
+}
+</Style>
+
+
+
+<!-- Área principal da aba Localizar -->
+<div class="main-content" >
+
+  <!-- Barra de navegação -->
+<div class="page">
+
+    <div class="breadcrumb">
+        <span>Início</span>
+        <span class="sep">></span>
+                <span>Incluir-Documento</span>
+
+    </div>
+
+  <!-- Título -->
+   
+  <h1>Incluir-Documento</h1>
+
+<div class="include-container">
+
+    <section class="include-card">
+
+        <!-- HEADER -->
+        <header class="include-header">
+            <h2>📄 ENVIAR ARQUIVO </h2>
+            <p>Envie o arquivo e preencha as informações necessárias</p>
+        </header>
+
+        <!-- UPLOAD -->
+        <div class="include-section">
+            <label class="section-title">Documento</label>
+
+            <div class="upload-box">
+                <input type="file" id="fileInput" hidden />
+                <label for="fileInput" class="upload-area">
+                    <span class="upload-icon">⬆</span>
+                    <strong>Selecionar arquivo</strong>
+                    <small>ou arraste e solte aqui</small>
+                </label>
+
+                <div class="file-preview" id="filePreview">
+                    Nenhum arquivo selecionado
+                </div>
+            </div>
+        </div>
+
+        <!-- LOCALIZAÇÃO -->
+        <div class="include-section grid-2">
+            <div class="form-row">
+                <label>Repositório</label>
+                <select>
+                    <option>OneDrive › TECHiNFORM - Pessoal</option>
+                    <option>Prefeitura Serra Branca</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label>Pasta</label>
+                <input type="text" placeholder="Ex: Documentos / Contratos">
+            </div>
+        </div>
+
+        <!-- CLASSIFICAÇÃO -->
+        <div class="include-section grid-2">
+            <div class="form-row">
+                <label>Classificação CCD</label>
+                <select>
+                    <option>Selecione</option>
+                    <option>01.01 – Administração Geral</option>
+                    <option>02.03 – Recursos Humanos</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label>Tabela de Temporalidade (TTD)</label>
+                <select>
+                    <option>Selecione</option>
+                    <option>5 anos – Eliminação</option>
+                    <option>Permanente</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- METADADOS -->
+        <div class="include-section">
+            <div class="form-row">
+                <label>Título do Documento</label>
+                <input type="text" placeholder="Ex: Contrato de Prestação de Serviço">
+            </div>
+
+            <div class="form-row">
+                <label>Descrição</label>
+                <textarea rows="3"></textarea>
+            </div>
+
+            <div class="form-row">
+                <label>Data do Documento</label>
+                <input type="date">
+            </div>
+        </div>
+
+        <!-- AÇÕES -->
+        <footer class="include-actions">
+            <button class="btn-secondary">Cancelar</button>
+            <button class="btn-primary">Salvar Documento</button>
+        </footer>
+
+    </section>
+
+</div>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Area-trabalho</title>
+<div class="page">
+
+    <div class="breadcrumb">
+        <span>Início</span>
+        <span class="sep">></span>
+    </div>
+
+    <h1>Área de Trabalho</h1>
+
+   
+  <!-- Barra de busca -->
+  <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+    <input
+      type="text"
+      placeholder="Informe uma ou mais palavras-chave para busca"
+      style="flex-grow: 1; max-width: 700px; padding: 8px 12px; font-size: 14px; border-radius: 4px; border: 1px solid #ccc;"
+      id="txtSearch"
+    />
+    <button
+      style="background-color: #0078d7; color: white; border: none; padding: 6px 16px; border-radius: 4px; cursor: pointer;"
+      onclick="search()"
+    >
+      Buscar
+    </button>
+    <button
+      style="padding: 6px 12px; border-radius: 4px; border: 1px solid #ccc; background: white; cursor: pointer;"
+      onclick="openFilters()"
+    >
+      Filtros
+    </button>
+  </div>
+
+    <div class="atividades">
+        <div class="bubble">4</div>
+        <span>Atividade(s) com você</span>
+    </div>
+
+    <div class="unidade">
+        <div class="header">PM DE EMAS - SEC. EDUCAÇÃO</div>
+
+        <div class="card-green">
+            <div class="content">
+                <div class="value">36 atividade(s)</div>
+                <div class="desc">Arquivo Digital</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

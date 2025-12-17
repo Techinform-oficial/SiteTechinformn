@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Repositórios</title>
+<link rel="stylesheet" href="componentes.css">
+</head>
+<body>
+
+<div class="page">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <span>Início</span> &gt; <span>Repositórios</span>
+    </div>
+
+    <h1>Repositórios</h1>
+
+    <div class="file-manager-container">
+
+        <!-- Barra superior -->
+        <div class="repositorio">
+            <div class="nav-buttons">
+                <button id="btnBack" title="Voltar" disabled>&larr;</button>
+                <button id="btnForward" title="Avançar" disabled>&rarr;</button>
+                <button id="btnRefresh" title="Atualizar">&#8635;</button>
+            </div>
+
+            <input id="addressBar" class="address-bar" type="text" 
+                   value="OneDrive > TECHiNFORM - Pessoal" 
+                   aria-label="Barra de endereço do diretório" spellcheck="false" />
+
+            <div class="search-bar">
+                <input id="searchInput" type="search" placeholder="Pesquisar em TECHiNFORM - Pessoal" />
+                <svg viewBox="0 0 24 24"><path d="M21.71 20.29l-3.388-3.388a7.5 7.5 0 10-1.414 1.414l3.388 3.388a1 1 0 001.414-1.414zM10 16a6 6 0 110-12 6 6 0 010 12z"/></svg>
+            </div>
+        </div>
+
+        <!-- Barra de ações -->
+        <div class="action-bar">
+            <button id="btnNew"><svg viewBox="0 0 24 24"><path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"/></svg> Novo</button>
+            <button id="btnCut"><svg viewBox="0 0 24 24"><path d="M18.364 5.636l-1.414 1.414L14.828 5.5 12 8.328 9.172 5.5 7.05 7.622l3.95 3.95-1.415 1.415-3.95-3.95L5.5 14.828l3.828-2.828 2.828 2.828-2.828 2.828-3.828-2.828-1.414 1.414 3.536 3.536a2.5 2.5 0 103.536-3.536l-3.536-3.536z"/></svg> Recortar</button>
+            <button id="btnCopy"><svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 00-2 2v14h2V3h12V1zm3 4H8a2 2 0 00-2 2v16a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2zm0 18H8V7h11v16z"/></svg> Copiar</button>
+            <button id="btnPaste"><svg viewBox="0 0 24 24"><path d="M16 3H8a2 2 0 00-2 2v14H4v2h16v-2h-2V5a2 2 0 00-2-2z"/></svg> Colar</button>
+
+            <div class="divider"></div>
+
+            <button id="btnRename"><svg viewBox="0 0 24 24"><path d="M19.71 4.04a1.003 1.003 0 00-1.42 0L14.12 8.22l-2.12 2.12-2.83 2.83-3.54 3.54V19h2.41l3.54-3.54 2.83-2.83 2.12-2.12 4.18-4.18a1.003 1.003 0 000-1.42z"/></svg> Renomear</button>
+            <button id="btnDelete"><svg viewBox="0 0 24 24"><path d="M6 7h12v12H6z" fill="none"/><path d="M9 7v12h6V7H9z" fill="none"/><path d="M18 6h-3.5l-1-1h-3l-1 1H6v2h12V6z"/></svg> Excluir</button>
+
+            <div class="divider"></div>
+
+            <button id="btnSort">Classificar ▼</button>
+            <button id="btnView">Visualizar ▼</button>
+            <button id="btnMore">⋯</button>
+        </div>
+
+        <!-- Conteúdo principal -->
+        <div class="file-content">
+
+            <!-- Árvore de pastas -->
+            <nav class="file-tree">
+                <div class="tree-item active" tabindex="0"><span class="icon">📁</span><span>Documentos</span></div>
+                <div class="tree-item" tabindex="0"><span class="icon">📁</span><span>EDIT – Arquivo Digital</span></div>
+                <div class="tree-item" tabindex="0"><span class="icon">📁</span><span>FABIANO – TECHINFORM</span></div>
+                <div class="tree-item" tabindex="0"><span class="icon">📁</span><span>Imagens</span></div>
+                <div class="tree-item" tabindex="0"><span class="icon">📁</span><span>Kézia – Arquivo Digital</span></div>
+                <div class="tree-item" tabindex="0"><span class="icon">📁</span><span>Prefeitura Serra Branca</span></div>
+                <div class="tree-item" tabindex="0"><span class="icon">📁</span><span>Prefeitura Santana</span></div>
+            </nav>
+
+            <!-- Lista de arquivos -->
+            <section class="file-list-container">
+                <table class="file-list">
+                    <thead>
+                        <tr>
+                            <th>Nome<div class="resizer"></div></th>
+                            <th>Status</th>
+                            <th>Data de modificação</th>
+                            <th>Tipo</th>
+                            <th>Tamanho</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fileTableBody">
+                        <tr tabindex="0"><td class="file-name-cell"><span class="icon">📁</span> Documentos</td><td class="icon-cell"><span class="status-cloud">☁</span></td><td>07/07/2025 14:34</td><td>Pasta de arquivos</td><td></td></tr>
+                        <tr tabindex="0"><td class="file-name-cell"><span class="icon">📁</span> EDITE - ARQUIVO DIGITAL</td><td class="icon-cell"><span class="status-sync">🔄</span></td><td>06/09/2024 18:38</td><td>Pasta de arquivos</td><td></td></tr>
+                        <tr tabindex="0"><td class="file-name-cell"><span class="icon">📁</span> FABIANO - TECHINFORM</td><td class="icon-cell"><span class="status-sync">🔄</span></td><td>06/09/2024 18:39</td><td>Pasta de arquivos</td><td></td></tr>
+                        <tr tabindex="0"><td class="file-name-cell"><span class="icon">📁</span> Imagens</td><td class="icon-cell"><span class="status-cloud">☁</span></td><td>05/05/2025 08:38</td><td>Pasta de arquivos</td><td></td></tr>
+                        <tr tabindex="0"><td class="file-name-cell"><span class="icon">📁</span> KÉZIA - ARQUIVO DIGITAL</td><td class="icon-cell"><span class="status-cloud">☁</span></td><td>15/01/2025 16:02</td><td>Pasta de arquivos</td><td></td></tr>
+                        <tr tabindex="0"><td class="file-name-cell"><span class="icon">📁</span> PREFEITURA SERRA BRANCA</td><td class="icon-cell"><span class="status-cloud">☁</span></td><td>11/11/2024 11:32</td><td>Pasta de arquivos</td><td></td></tr>
+                        <tr tabindex="0"><td class="file-name-cell"><span class="icon">📄</span> Relatório.pdf</td><td class="icon-cell"><span class="status-ok">✔</span></td><td>04/01/2025 12:00</td><td>Documento PDF</td><td>350 KB</td></tr>
+                        <tr tabindex="0"><td class="file-name-cell"><span class="icon">🖼️</span> imagem1.png</td><td class="icon-cell"><span class="status-cloud">☁</span></td><td>02/01/2025 09:15</td><td>Imagem PNG</td><td>2.1 MB</td></tr>
+                    </tbody>
+                </table>
+                <div class="footer-info">8 itens</div>
+            </section>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

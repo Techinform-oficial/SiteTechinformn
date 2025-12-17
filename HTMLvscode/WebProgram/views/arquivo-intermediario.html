@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arquivo Intermediário</title>
+
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .content-root {
+    padding: 30px 35px;
+  }
+
+  /* ================= HEADER ================= */
+
+  .content-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+
+  .page-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #1a1a1a;
+  }
+
+  .page-subtitle {
+    font-size: 13px;
+    color: #6d6d6d;
+  }
+
+  .content-header button {
+    padding: 10px 18px;
+    border-radius: 18px;
+    font-size: 13px;
+    cursor: pointer;
+    border: none;
+  }
+
+  .primary-button {
+    background-color: #0b2958;
+    color: white;
+  }
+
+  .secondary-button {
+    background-color: #eef3fb;
+    color: #193867;
+  }
+
+  /* ================= BUSCA ================= */
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px 15px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.07);
+    flex: 1;
+  }
+
+  .search-box input {
+    border: none;
+    outline: none;
+    font-size: 13px;
+    flex: 1;
+  }
+
+  /* ================= TABELA ================= */
+
+  .table-card {
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead {
+    background: #f3f5f9;
+  }
+
+  th {
+    padding: 14px;
+    text-align: left;
+    font-weight: 600;
+    color: #334155;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  td {
+    padding: 14px;
+    border-bottom: 1px solid #eef0f4;
+    color: #333;
+  }
+
+  tbody tr:hover {
+    background: #f8fafc;
+  }
+
+  /* ================= STATUS ================= */
+
+  .status {
+    padding: 4px 10px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 600;
+    width: fit-content;
+  }
+
+  .status.reavaliacao {
+    background: #fff7ed;
+    color: #9a3412;
+  }
+
+  .status.guarda {
+    background: #e0ecff;
+    color: #1d4ed8;
+  }
+
+  .status.destinacao {
+    background: #ede9fe;
+    color: #5b21b6;
+  }
+
+  /* ================= EMPTY ================= */
+
+  .empty-card {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 55px 45px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .empty-icon {
+    font-size: 52px;
+    color: #b7c0d0;
+  }
+
+  .empty-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #111;
+  }
+
+  .empty-text {
+    font-size: 13px;
+    color: #747474;
+  }
+</style>
+</head>
+
+<body>
+<div class="content-root">
+
+  <!-- HEADER -->
+  <div class="content-header">
+    <div>
+      <div class="page-title">Arquivo Intermediário</div>
+      <div class="page-subtitle">
+        Documentos aguardando reavaliação, destinação ou prazo de guarda
+      </div>
+    </div>
+    <div style="flex:1"></div>
+    <button class="secondary-button">🔽 Filtros</button>
+    <button class="primary-button">Avaliar Destinação</button>
+  </div>
+
+  <!-- BUSCA -->
+  <div class="search-container">
+    <div class="search-box">
+      <span>🔍</span>
+      <input type="text" placeholder="Buscar por título, processo, classificação, prazo...">
+    </div>
+    <button class="primary-button">Buscar</button>
+  </div>
+
+  <!-- TABELA DE INTERMEDIÁRIO -->
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Título do Documento</th>
+          <th>Nº Processo</th>
+          <th>Classificação</th>
+          <th>Prazo de Guarda</th>
+          <th>Data de Reavaliação</th>
+          <th>Destinação Prevista</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- DADOS BASE (MOCKADOS) -->
+        <tr>
+          <td>Relatório de Contrato Encerrado</td>
+          <td>PROC-2022/0114</td>
+          <td>Contratos</td>
+          <td>5 anos</td>
+          <td>15/06/2026</td>
+          <td>Recolhimento</td>
+          <td><span class="status guarda">Em guarda</span></td>
+        </tr>
+
+        <tr>
+          <td>Processo Licitatório Finalizado</td>
+          <td>PROC-2021/0089</td>
+          <td>Licitação</td>
+          <td>3 anos</td>
+          <td>10/02/2025</td>
+          <td>Eliminação</td>
+          <td><span class="status reavaliacao">Reavaliação</span></td>
+        </tr>
+
+        <tr>
+          <td>Parecer Técnico Conclusivo</td>
+          <td>PROC-2020/0033</td>
+          <td>Técnico</td>
+          <td>10 anos</td>
+          <td>01/09/2030</td>
+          <td>Histórico</td>
+          <td><span class="status destinacao">Destinação definida</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div class="empty-card">
+    <div class="empty-icon">🗂️</div>
+    <div class="empty-title">Nenhum documento no arquivo intermediário</div>
+    <div class="empty-text">
+      Os documentos aparecem aqui após saírem do arquivo corrente.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

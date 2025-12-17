@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TechInform</title>
+
+    <!-- CSS base -->
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+
+    <style>
+      #main-content {
+        flex: 1;
+        overflow-y: auto;
+        background: #efefef;
+        min-height: 100vh;
+      }
+
+      body, html {
+        margin: 0; 
+        padding: 0; 
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #app {
+        display: flex;
+        height: calc(100vh - 56px);
+        overflow: hidden;
+      }
+    </style>
+</head>
+<body>
+
+    <!-- TopBar -->
+    <div id="topbar-container"></div>
+
+    <div id="app">
+        <!-- Sidebar -->
+     <div id="sidebar-container"></div>
+
+        <!-- Conteúdo principal -->
+     <div id="main-content"></div>
+     
+    </div>
+
+    <!-- Scripts -->
+    <script>
+
+      // --------------------------
+      // Função universal para carregar HTML
+      // --------------------------
+      async function loadHTML(containerId, url) {
+        const res = await fetch(url);
+        const html = await res.text();
+        document.getElementById(containerId).innerHTML = html;
+      }
+
+      // --------------------------
+      // Toggle Sidebar (topbar + botão lateral)
+      // --------------------------
+      function setupSidebarToggle() {
+    const sidebar = document.getElementById("sidebar");
+    const btn = document.getElementById("btnToggleMenu"); // botão da topbar
+
+    btn.addEventListener("click", () => {
+        sidebar.classList.toggle("collapsed");
+    });
+}
+
+
+      // --------------------------
+      // Expandir / recolher seções
+      // --------------------------
+      function setupSidebarSections() {
+        document.querySelectorAll(".section-header").forEach(header => {
+          header.addEventListener("click", () => {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector(".arrow");
+            const isVisible = content.style.display === "block";
+            content.style.display = isVisible ? "none" : "block";
+            arrow.textContent = isVisible ? "▶" : "▼";
+          });
+        });
+      }
+
+      // --------------------------
+      // Navegação entre views
+      // --------------------------
+      function setupSidebarNavigation() {
+        const sidebar = document.getElementById("sidebar");
+
+        sidebar.querySelectorAll(".sidebar-item").forEach(item => {
+          item.addEventListener("click", async () => {
+            const viewName = item.getAttribute("data-view");
+            if (!viewName) return;
+
+            await loadHTML("main-content", `views/${viewName}.html`);
+          });
+        });
+      }
+
+      // --------------------------
+      // Inicialização da Aplicação
+      // --------------------------
+      async function initApp() {
+        await loadHTML("topbar-container", "components/topbar.html");
+        await loadHTML("sidebar-container", "components/sidebar.html");
+
+        // Sidebar começa fechada
+        setTimeout(() => {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.add("collapsed");
+        }, 50);
+
+        // Após carregar os componentes, precisamos ativar scripts relacionados à sidebar
+        setupSidebarToggle();
+        setupSidebarSections();
+        setupSidebarNavigation();
+
+        // Página padrão
+        await loadHTML("main-content", "views/area-trabalho.html");
+      }
+
+      window.onload = initApp;
+
+    </script>
+</body>
+</html>

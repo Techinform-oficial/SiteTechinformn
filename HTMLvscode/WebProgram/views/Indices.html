@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Índices e Relatórios</title>
+
+    <!-- CSS PRINCIPAL DO SISTEMA -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* =========================
+           INDICES — LAYOUT
+        ========================== */
+
+        .indices-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .indice-card {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .indice-card h3 {
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: #0b2958;
+        }
+
+        .indice-kpis {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .kpi {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+        }
+
+        .kpi span {
+            display: block;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .kpi strong {
+            font-size: 22px;
+            color: #0b2958;
+        }
+
+        /* =========================
+           TABELA DE ÍNDICES
+        ========================== */
+
+        .indices-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .indices-table th {
+            background: #f3f3f3;
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .indices-table td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            width: fit-content;
+        }
+
+        .badge.ok {
+            background: #16a34a;
+        }
+
+        .badge.alerta {
+            background: #f59e0b;
+        }
+
+        .badge.atraso {
+            background: #dc2626;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOPBAR -->
+    <div id="topbar"></div>
+
+    <div style="display:flex; height: calc(100vh - 56px);">
+
+        <!-- SIDEBAR -->
+        <div id="sidebar"></div>
+
+        <!-- CONTEÚDO -->
+        <main class="page" style="flex:1; overflow:auto;">
+
+            <div class="breadcrumb">
+                <span>Relatórios</span>
+                <span class="sep">›</span>
+                <span>Índices</span>
+            </div>
+
+            <h1>Índices de Andamento de Processos</h1>
+
+            <!-- KPIs -->
+            <div class="indice-kpis">
+                <div class="kpi">
+                    <span>Processos Ativos</span>
+                    <strong>248</strong>
+                </div>
+                <div class="kpi">
+                    <span>Concluídos no Prazo</span>
+                    <strong>82%</strong>
+                </div>
+                <div class="kpi">
+                    <span>Tempo Médio (dias)</span>
+                    <strong>14</strong>
+                </div>
+            </div>
+
+            <!-- GRÁFICOS -->
+            <div class="indices-container">
+                <div class="indice-card">
+                    <h3>Andamento dos Processos</h3>
+                    <canvas id="graficoStatus"></canvas>
+                </div>
+
+                <div class="indice-card">
+                    <h3>Cumprimento de Prazos</h3>
+                    <canvas id="graficoPrazos"></canvas>
+                </div>
+
+                <div class="indice-card">
+                    <h3>Estimativa de Conclusão</h3>
+                    <canvas id="graficoTempo"></canvas>
+                </div>
+            </div>
+
+            <!-- TABELA -->
+            <div class="indice-card" style="margin-top:20px;">
+                <h3>Índices por Tipo de Processo</h3>
+
+                <table class="indices-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo de Processo</th>
+                            <th>Total</th>
+                            <th>Concluídos</th>
+                            <th>% Conclusão</th>
+                            <th>Prazo Médio</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Arquivo Corrente</td>
+                            <td>120</td>
+                            <td>98</td>
+                            <td>81%</td>
+                            <td>12 dias</td>
+                            <td><span class="badge ok">Dentro do prazo</span></td>
+                        </tr>
+                        <tr>
+                            <td>Arquivo Intermediário</td>
+                            <td>78</td>
+                            <td>55</td>
+                            <td>70%</td>
+                            <td>18 dias</td>
+                            <td><span class="badge alerta">Atenção</span></td>
+                        </tr>
+                        <tr>
+                            <td>Arquivo Permanente</td>
+                            <td>50</td>
+                            <td>29</td>
+                            <td>58%</td>
+                            <td>25 dias</td>
+                            <td><span class="badge atraso">Em atraso</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- COMPONENTES -->
+    <script src="../assets/js/app.js"></script>
+
+    <!-- GRÁFICOS -->
+    <script>
+        new Chart(document.getElementById('graficoStatus'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Concluídos', 'Em Andamento', 'Pendentes'],
+                datasets: [{
+                    data: [180, 48, 20],
+                    backgroundColor: ['#16a34a', '#2563eb', '#f59e0b']
+                }]
+            }
+        });
+
+        new Chart(document.getElementById('graficoPrazos'), {
+            type: 'bar',
+            data: {
+                labels: ['Dentro do Prazo', 'Próximo do Vencimento', 'Atrasados'],
+                datasets: [{
+                    data: [82, 11, 7],
+                    backgroundColor: ['#16a34a', '#f59e0b', '#dc2626']
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        new Chart(document.getElementById('graficoTempo'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Dias para Conclusão',
+                    data: [18, 17, 15, 14, 13, 14],
+                    borderColor: '#0b2958',
+                    backgroundColor: 'rgba(11,41,88,0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            }
+        });
+    </script>
+
+</body>
+</html>
